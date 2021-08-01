@@ -41,10 +41,13 @@
                     </div>
                     <div class="col-6 offset-3 d-flex align-items-center">
                         <ul class="list-group w-100">
-                            <li v-for="todo in todos" class="list-group-item">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                                <span>{{ todo.text }}</span>
-
+                            <li v-for="(todo,index) in todos"
+                                class="list-group-item d-flex align-items-center justify-content-between">
+                                <span><input class="form-check-input me-2 clickable" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    {{ todo.text }}</span>
+                                <span @click="deleteTask(index)" class="delete-task clickable"><i
+                                        class="fas fa-times"></i></span>
                             </li>
                         </ul>
                     </div>

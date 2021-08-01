@@ -7,5 +7,10 @@ var root = new Vue({
             { text: 'Fare un buca in giardino' },
             { text: 'Tirare sassi in mare' },
         ]
+    },
+    methods: {
+        deleteTask(index) {
+
+        }
     }
 })
