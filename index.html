@@ -21,38 +21,46 @@
 <body>
     <div id="root">
 
+
         <header>
             <div class="container">
                 <div class="row">
-                    <div class="col-6 offset-3 d-flex align-items-center my-3">
+                    <div class="col-6 offset-3 d-flex justify-content-center align-items-center my-3">
                         <h1>TODO APP</h1>
                     </div>
                 </div>
             </div>
         </header>
-        <main>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 offset-3 input-group w-50 mb-3">
-                        <input type="text" class="form-control" placeholder="Add task" aria-label="Add task"
-                            aria-describedby="basic-addon1">
-                        <span class="input-group-text bg-success clickable" id="basic-addon1"><i
-                                class="fas fa-plus"></i></span>
-                    </div>
-                    <div class="col-6 offset-3 d-flex align-items-center">
-                        <ul class="list-group w-100">
-                            <li v-for="(todo,index) in todos"
-                                class="list-group-item d-flex align-items-center justify-content-between">
-                                <span><input class="form-check-input me-2 clickable" type="checkbox" value=""
-                                        id="flexCheckDefault">
-                                    {{ todo.text }}</span>
-                                <span @click="deleteTask(index)" class="delete-task clickable"><i
-                                        class="fas fa-times"></i></span>
-                            </li>
-                        </ul>
-                    </div>
+        <main class="container">
+
+            <div class="row">
+                <div class="col-6 offset-3 input-group w-50 mb-3">
+                    <input type="text" class="form-control" placeholder="Search..." v-model="searchTerm">
+                    <span class="input-group-text clickable"><i class="fas fa-search"></i></span>
+                </div>
+                <div class="col-6 offset-3 input-group w-50 mb-3">
+                    <input type="text" class="form-control" placeholder="Add todo" v-model="newTodo"
+                        @keyup.enter="addTodo">
+                    <span class="input-group-text bg-success clickable" @click="addTodo"><i
+                            class="fas fa-plus"></i></span>
+                </div>
+                <div class="col-6 offset-3 d-flex justify-content-center align-items-center">
+                    <h3 class="my-5" v-if="!todos.length">Non ci sono cose da fare</h3>
+                    <ul class="list-group w-100" v-else>
+                        <li v-for="(todo, index) in todos" v-if="showItem(todo.text)"
+                            class="list-group-item d-flex justify-content-between align-items-center">
+                            <div @click="toggleDone(index)" class="clickable"><i class="me-2 far"
+                                    :class="isDone(index) ? 'fa-check-square' : 'fa-square' "></i>
+                                <span :class="isDone(index) ? 'text-decoration-line-through' : '' ">{{ todo.text
+                                    }}</span>
+                            </div>
+                            <button @click="deleteTodo(index)" type="button" class="btn-close"
+                                aria-label="Close"></button>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </main>
 
     </div>
